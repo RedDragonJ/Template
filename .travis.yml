@@ -1,0 +1,33 @@
+language: swift
+osx_image: xcode10.2
+
+branches:
+  only: 
+    - master
+
+git:
+  depth: false
+
+env:
+  global:
+    - LC_CTYPE=en_US.UTF-8
+    - LANG=en_US.UTF-8
+    
+before_install:
+    - env
+    - locale
+    - gem install cocoapods --prerelease --no-document --quiet
+    - gem install xcpretty --no-document --quiet
+    - pod --version
+    - xcpretty --version
+    - xcodebuild -version
+    - xcodebuild -showsdks
+
+script:
+  - echo "Check if the library described by the podspec can be built"
+    - pod lib lint
+  - echo "Build as static library"
+    - xcodebuild clean build -project JimSDK/JimSDK.xcworkspace -scheme 'JimSDK' -sdk iphonesimulator PLATFORM_NAME=iphonesimulator -configuration Release | xcpretty -c
+  - echo "Build test app"
+    - xcodebuild clean build -project JimSDK/JimSDK.xcworkspace -scheme 'JimSDKSample' -sdk iphonesimulator PLATFORM_NAME=iphonesimulator -configuration Release | xcpretty -c
+
