@@ -20,8 +20,10 @@ before_install:
 before_script:
 - git lfs pull
 
-# Workspace
-script: xcodebuild clean build -workspace SoloRocket/SpaceShip.xcworkspace -scheme 'SpaceShip' -sdk iphonesimulator -destination “platform=iOS Simulator,OS=12.1,name=iPhone X” ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO
-
-# Project
-script: xcodebuild clean build test -project SampleName/SampleName.xcodeproj -scheme SampleName -sdk iphonesimulator -destination “platform=iOS Simulator,OS=12.1,name=iPhone X” ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO
+script:
+  - echo "Check if the library described by the podspec can be built"
+    - pod lib lint
+  - echo "Build as static library"
+    - xcodebuild clean build -project Name/Name.xcworkspace -scheme 'Name' -sdk iphonesimulator -destination “platform=iOS Simulator,OS=12.1,name=iPhone X” ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO -configuration Release | xcpretty -c
+  - echo "Build test app"
+    - xcodebuild clean build -project Name/Name.xcworkspace -scheme 'NameSample' -sdk iphonesimulator -destination “platform=iOS Simulator,OS=12.1,name=iPhone X” ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO -configuration Release | xcpretty -c
