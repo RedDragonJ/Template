@@ -24,7 +24,7 @@ BUILD_NUMBER=$((NUMBER_OF_COMMITS+1))
 ```
 
 - Swiftlint (https://github.com/RedDragonJ/SoloRocket/blob/master/.swiftlint.yml)
-Note: .swiftlint.yml. must be in the root file level
+<br>Note: swiftlint.yml. must be in the root file level
 ```ruby
 pod 'SwiftLint'
 "${PODS_ROOT}/SwiftLint/swiftlint" lint "${SRCROOT}/.swiftlint.yml"
