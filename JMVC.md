@@ -28,4 +28,4 @@
   Purpose: Utility only contain helpers, tools and extesnions that's specifically for easier development
   Scope: Utility should not know anything outside it's purpose.
   
-# Constant should exist inside resources
+## Constant should exist inside resources
