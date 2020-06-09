@@ -32,3 +32,5 @@
 
 ### Resource
 - Constant should exist inside resources
+
+### Third-party Manager (Name accordingly)
