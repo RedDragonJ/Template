@@ -10,12 +10,18 @@ git:
   depth: false
 
 env:
+  //Swift package - TOOLCHAINS=swift
   global:
     - LC_CTYPE=en_US.UTF-8
     - LANG=en_US.UTF-8
 
 before_install:
 - brew install git-lfs
+
+//Swift package
+- TOOLCHAIN_VERSION=swift-DEVELOPMENT-SNAPSHOT-2016-03-24-a
+- curl -O https://swift.org/builds/development/xcode/${TOOLCHAIN_VERSION}/${TOOLCHAIN_VERSION}-osx.pkg
+- sudo installer -pkg ${TOOLCHAIN_VERSION}-osx.pkg -target /
 
 before_script:
 - git lfs pull
@@ -27,3 +33,5 @@ script:
     - xcodebuild clean build -project Name/Name.xcworkspace -scheme 'Name' -sdk iphonesimulator -destination “platform=iOS Simulator,OS=12.1,name=iPhone X” ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO -configuration Release | xcpretty -c
   - echo "Build test app"
     - xcodebuild clean build -project Name/Name.xcworkspace -scheme 'NameSample' -sdk iphonesimulator -destination “platform=iOS Simulator,OS=12.1,name=iPhone X” ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO -configuration Release | xcpretty -c
+
+  //Swift package - swift build --fetch
